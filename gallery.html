@@ -260,66 +260,16 @@
             </div>
         </div>
         
-        <!-- Submitted Briefs Section -->
-        <div id="submitted-briefs-section" style="display: none;">
-            <h2 style="text-align: center; color: #D56C2A; margin: 40px 0 20px; font-size: 22px; text-transform: uppercase; letter-spacing: 1px;">Recently Submitted</h2>
-            <div class="gallery-grid" id="submitted-briefs-grid">
-                <!-- Submitted briefs will be inserted here -->
-            </div>
-        </div>
-        
         <div class="cta-section">
             <p class="cta-text">Ready to create your own case brief?</p>
-            <a href="https://reb-elle-art.github.io/casebriefr/template-v2.html" class="cta-button">Create a Brief</a>
+            <a href="https://casebriefr.com/template.html" class="cta-button">Create a Brief</a>
         </div>
     </main>
     
     <footer>
         <p>d-Briefs — A gallery for case brief research</p>
-        <p>Create briefs at <a href="https://reb-elle-art.github.io/casebriefr/">Casebriefr</a> · Browse them here</p>
+        <p>Create briefs at <a href="https://casebriefr.com">Casebriefr</a> · Browse them here</p>
         <p style="margin-top: 10px; font-size: 12px;">Data provided by the <a href="https://case.law">Caselaw Access Project</a></p>
     </footer>
-    
-    <script>
-        // Load and display submitted briefs from localStorage
-        function loadSubmittedBriefs() {
-            const submissions = JSON.parse(localStorage.getItem('dbrief-submissions') || '[]');
-            const grid = document.getElementById('submitted-briefs-grid');
-            const section = document.getElementById('submitted-briefs-section');
-            
-            if (submissions.length === 0) {
-                section.style.display = 'none';
-                return;
-            }
-            
-            // Show most recent 6 submissions
-            const recentSubmissions = submissions.slice(-6).reverse();
-            
-            grid.innerHTML = recentSubmissions.map(brief => `
-                <div class="brief-card" onclick="viewBrief('${brief.id}')">
-                    <div class="citation">${brief.citation || 'No citation'}</div>
-                    <div class="case-name">${brief.caseName}</div>
-                    <div class="court">${brief.court || 'Unknown court'}</div>
-                    <div class="snippet">${brief.facts ? brief.facts.substring(0, 150) + '...' : 'No facts provided'}</div>
-                    <div style="margin-top: 10px; font-size: 12px; color: #999;">Briefed by: ${brief.briefedBy}</div>
-                </div>
-            `).join('');
-            
-            section.style.display = 'block';
-        }
-        
-        function viewBrief(id) {
-            const submissions = JSON.parse(localStorage.getItem('dbrief-submissions') || '[]');
-            const brief = submissions.find(b => b.id === id);
-            if (brief) {
-                // Store current brief in sessionStorage for viewing
-                sessionStorage.setItem('current-brief', JSON.stringify(brief));
-                window.open('brief-viewer.html?id=' + id, '_blank');
-            }
-        }
-        
-        // Load submitted briefs on page load
-        loadSubmittedBriefs();
-    </script>
 </body>
 </html>
