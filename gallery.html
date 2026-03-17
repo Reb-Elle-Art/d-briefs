@@ -18,7 +18,7 @@
             color: #333;
         }
         
-        /* Header - Matches Casebriefr Template */
+        /* Header */
         header {
             background: white;
             border-bottom: 2px solid #D56C2A;
@@ -83,6 +83,41 @@
             margin-right: auto;
         }
         
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            margin-top: 40px;
+        }
+        
+        .section-header h2 {
+            font-size: 20px;
+            color: #1a202c;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: #ddd;
+        }
+        
+        /* New Badge */
+        .new-badge {
+            display: inline-block;
+            background: #D56C2A;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 10px;
+        }
+        
         /* Gallery Grid */
         .gallery-grid {
             display: grid;
@@ -98,6 +133,9 @@
             padding: 25px;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
         }
         
         .brief-card:hover {
@@ -134,6 +172,27 @@
             border-top: 1px solid #e2e8f0;
             padding-top: 15px;
             margin-top: 15px;
+        }
+        
+        .brief-card .date-added {
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+            font-style: italic;
+        }
+        
+        /* Spotlight Section */
+        .spotlight-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 900px) {
+            .spotlight-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         /* CTA Section */
@@ -216,60 +275,137 @@
             that precede polished final products. Click any brief to view the full analysis.
         </p>
         
-        <div class="gallery-grid">
-            <div class="brief-card">
-                <div class="citation">393 Mass. 564 (1984)</div>
-                <div class="case-name">Commonwealth v. Hine</div>
-                <div class="court">Massachusetts Supreme Judicial Court</div>
-                <div class="snippet">Analysis of reasonable doubt instructions and jury deliberation procedures in criminal cases.</div>
-            </div>
-            
-            <div class="brief-card">
-                <div class="citation">5 U.S. (1 Cranch) 137 (1803)</div>
-                <div class="case-name">Marbury v. Madison</div>
-                <div class="court">U.S. Supreme Court</div>
-                <div class="snippet">Landmark case establishing judicial review and the power of federal courts to declare acts of Congress unconstitutional.</div>
-            </div>
-            
-            <div class="brief-card">
-                <div class="citation">404 Mass. 160 (1989)</div>
-                <div class="case-name">Sullivan v. Rooney</div>
-                <div class="court">Massachusetts Supreme Judicial Court</div>
-                <div class="snippet">Medical malpractice case addressing the standard of care and expert testimony requirements.</div>
-            </div>
-            
-            <div class="brief-card">
-                <div class="citation">945 F. Supp. 2d 216 (D. Mass. 2013)</div>
-                <div class="case-name">United States v. Swartz</div>
-                <div class="court">U.S. District Court (D. Mass.)</div>
-                <div class="snippet">Computer fraud case examining the Computer Fraud and Abuse Act and unauthorized access to protected computers.</div>
-            </div>
-            
-            <div class="brief-card">
-                <div class="citation">11 Mass. App. Ct. 959 (1981)</div>
-                <div class="case-name">Roberts v. Healey</div>
-                <div class="court">Massachusetts Appeals Court</div>
-                <div class="snippet">Administrative law case concerning agency authority and the standard of review for administrative decisions.</div>
-            </div>
-            
-            <div class="brief-card">
-                <div class="citation">Record No. 0756-94-3 (Va. Ct. App. 1995)</div>
-                <div class="case-name">Brock v. Commonwealth</div>
-                <div class="court">Court of Appeals of Virginia</div>
-                <div class="snippet">Criminal procedure case addressing sufficiency of evidence and appellate review standards.</div>
-            </div>
+        <!-- Recently Added Section -->
+        <div class="section-header">
+            <h2>Recently Added</h2>
+            <span class="new-badge">New</span>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="spotlight-grid" id="recent-briefs">
+            <!-- Populated by JavaScript -->
+        </div>
+        
+        <!-- All Briefs Section -->
+        <div class="section-header">
+            <h2>All Briefs</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="gallery-grid" id="all-briefs">
+            <!-- Populated by JavaScript -->
         </div>
         
         <div class="cta-section">
             <p class="cta-text">Ready to create your own case brief?</p>
-            <a href="https://casebriefr.com/template.html" class="cta-button">Create a Brief</a>
+            <a href="https://reb-elle-art.github.io/casebriefr/" class="cta-button">Create a Brief</a>
         </div>
     </main>
     
     <footer>
         <p>d-Briefs — A gallery for case brief research</p>
-        <p>Create briefs at <a href="https://casebriefr.com">Casebriefr</a> · Browse them here</p>
+        <p>Create briefs at <a href="https://reb-elle-art.github.io/casebriefr/">Casebriefr</a> · Browse them here</p>
         <p style="margin-top: 10px; font-size: 12px;">Data provided by the <a href="https://case.law">Caselaw Access Project</a></p>
     </footer>
+    
+    <script>
+        // Brief data - in production this could be fetched from a JSON file or API
+        const briefs = [
+            {
+                id: 'commonwealth-v-hine',
+                citation: '393 Mass. 564 (1984)',
+                caseName: 'Commonwealth v. Hine',
+                court: 'Massachusetts Supreme Judicial Court',
+                snippet: 'Analysis of reasonable doubt instructions and jury deliberation procedures in criminal cases.',
+                dateAdded: '2024-03-10',
+                filename: '2026-03-10_Hine-v-Commonwealth.html'
+            },
+            {
+                id: 'marbury-v-madison',
+                citation: '5 U.S. (1 Cranch) 137 (1803)',
+                caseName: 'Marbury v. Madison',
+                court: 'U.S. Supreme Court',
+                snippet: 'Landmark case establishing judicial review and the power of federal courts to declare acts of Congress unconstitutional.',
+                dateAdded: '2024-03-11',
+                filename: '2026-03-11_Marbury-v-Madison.html'
+            },
+            {
+                id: 'sullivan-v-rooney',
+                citation: '404 Mass. 160 (1989)',
+                caseName: 'Sullivan v. Rooney',
+                court: 'Massachusetts Supreme Judicial Court',
+                snippet: 'Medical malpractice case addressing the standard of care and expert testimony requirements.',
+                dateAdded: '2024-03-11',
+                filename: '2026-03-11_sullivan-v-rooney.html'
+            },
+            {
+                id: 'united-states-v-swartz',
+                citation: '945 F. Supp. 2d 216 (D. Mass. 2013)',
+                caseName: 'United States v. Swartz',
+                court: 'U.S. District Court (D. Mass.)',
+                snippet: 'Computer fraud case examining the Computer Fraud and Abuse Act and unauthorized access to protected computers.',
+                dateAdded: '2024-03-11',
+                filename: '2026-03-11_United-States-v-Swartz.md'
+            },
+            {
+                id: 'roberts-v-healey',
+                citation: '11 Mass. App. Ct. 959 (1981)',
+                caseName: 'Roberts v. Healey',
+                court: 'Massachusetts Appeals Court',
+                snippet: 'Administrative law case concerning agency authority and the standard of review for administrative decisions.',
+                dateAdded: '2024-03-10',
+                filename: '2026-03-10_Roberts-v-Healey.html'
+            },
+            {
+                id: 'brock-v-commonwealth',
+                citation: 'Record No. 0756-94-3 (Va. Ct. App. 1995)',
+                caseName: 'Brock v. Commonwealth',
+                court: 'Court of Appeals of Virginia',
+                snippet: 'Criminal procedure case addressing sufficiency of evidence and appellate review standards.',
+                dateAdded: '2024-03-11',
+                filename: '2026-03-11_Brock-v-Commonwealth.md'
+            }
+        ];
+        
+        // Sort by date (newest first)
+        briefs.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+        
+        // Get 3 most recent for spotlight
+        const recentBriefs = briefs.slice(0, 3);
+        const allBriefs = briefs;
+        
+        // Check if brief is new (added within last 7 days)
+        function isNew(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diffTime = Math.abs(now - date);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays <= 7;
+        }
+        
+        // Render brief card
+        function renderBriefCard(brief, showDate = false) {
+            const newBadge = isNew(brief.dateAdded) ? '<span class="new-badge">New</span>' : '';
+            const dateHtml = showDate ? `<div class="date-added">Added: ${new Date(brief.dateAdded).toLocaleDateString()}</div>` : '';
+            
+            return `
+                <a href="d-briefs-archive/${brief.filename}" class="brief-card" target="_blank">
+                    <div class="citation">${brief.citation} ${newBadge}</div>
+                    <div class="case-name">${brief.caseName}</div>
+                    <div class="court">${brief.court}</div>
+                    <div class="snippet">${brief.snippet}</div>
+                    ${dateHtml}
+                </a>
+            `;
+        }
+        
+        // Populate recent briefs
+        const recentContainer = document.getElementById('recent-briefs');
+        recentContainer.innerHTML = recentBriefs.map(b => renderBriefCard(b, true)).join('');
+        
+        // Populate all briefs
+        const allContainer = document.getElementById('all-briefs');
+        allContainer.innerHTML = allBriefs.map(b => renderBriefCard(b, false)).join('');
+    </script>
 </body>
 </html>
