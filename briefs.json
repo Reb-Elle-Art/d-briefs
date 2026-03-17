@@ -1,32 +1,5 @@
 [
   {
-    "id": "me-v-the-world",
-    "citation": "Citation not provided",
-    "caseName": "Me v. The World",
-    "court": "Court not specified",
-    "snippet": "Brief submitted via Casebriefr",
-    "dateAdded": "2026-03-17",
-    "filename": "Me-v-The-World.html"
-  },
-  {
-    "id": "the-world-v-me",
-    "citation": "Citation not provided",
-    "caseName": "The World V. Me",
-    "court": "Court not specified",
-    "snippet": "Brief submitted via Casebriefr",
-    "dateAdded": "2026-03-17",
-    "filename": "The-World-V-Me.html"
-  },
-  {
-    "id": "2026-03-17-marbury-v-madison",
-    "citation": "Citation not provided",
-    "caseName": "Marbury v. Madison",
-    "court": "Court not specified",
-    "snippet": "Brief submitted via Casebriefr",
-    "dateAdded": "2026-03-17",
-    "filename": "2026-03-17_Marbury-v-Madison.html"
-  },
-  {
     "id": "marbury-v-madison",
     "citation": "5 U.S. (1 Cranch) 137 (1803)",
     "caseName": "Marbury v. Madison",
@@ -69,7 +42,7 @@
     "court": "Massachusetts Supreme Judicial Court",
     "snippet": "Analysis of reasonable doubt instructions and jury deliberation procedures in criminal cases.",
     "dateAdded": "2024-03-10",
-    "filename": "2026-03-10_Hine-v-Commonwealth.html"
+    "filename": "2026-03-11_Commonwealth-v-Hine.html"
   },
   {
     "id": "roberts-v-healey",
@@ -79,5 +52,14 @@
     "snippet": "Administrative law case concerning agency authority and the standard of review for administrative decisions.",
     "dateAdded": "2024-03-10",
     "filename": "2026-03-10_Roberts-v-Healey.html"
+  },
+  {
+    "id": "wilcox-v-trautz",
+    "citation": "427 Mass. 326 (1998)",
+    "caseName": "Wilcox v. Trautz",
+    "court": "Massachusetts Supreme Judicial Court",
+    "snippet": "Cohabitation agreements case examining enforceability of contracts between unmarried couples.",
+    "dateAdded": "2024-03-11",
+    "filename": "Wilcox-v-Trautz-427-Mass-326-1998.html"
   }
 ]
