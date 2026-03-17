@@ -309,79 +309,98 @@
     </footer>
     
     <script>
-        // Brief data - in production this could be fetched from a JSON file or API
-        const briefs = [
-            {
-                id: 'me-v-the-world',
-                citation: '991 S.W.2d 873 (Tex. App. 1999)',
-                caseName: 'Me v. The World',
-                court: 'Basketball Court',
-                snippet: 'A test brief submitted via the new Submit to d-Brief button.',
-                dateAdded: '2026-03-17',
-                filename: 'Me-v-The-World.html'
-            },
-            {
-                id: 'commonwealth-v-hine',
-                citation: '393 Mass. 564 (1984)',
-                caseName: 'Commonwealth v. Hine',
-                court: 'Massachusetts Supreme Judicial Court',
-                snippet: 'Analysis of reasonable doubt instructions and jury deliberation procedures in criminal cases.',
-                dateAdded: '2024-03-10',
-                filename: '2026-03-10_Hine-v-Commonwealth.html'
-            },
-            {
-                id: 'marbury-v-madison',
-                citation: '5 U.S. (1 Cranch) 137 (1803)',
-                caseName: 'Marbury v. Madison',
-                court: 'U.S. Supreme Court',
-                snippet: 'Landmark case establishing judicial review and the power of federal courts to declare acts of Congress unconstitutional.',
-                dateAdded: '2024-03-11',
-                filename: '2026-03-11_Marbury-v-Madison.html'
-            },
-            {
-                id: 'sullivan-v-rooney',
-                citation: '404 Mass. 160 (1989)',
-                caseName: 'Sullivan v. Rooney',
-                court: 'Massachusetts Supreme Judicial Court',
-                snippet: 'Medical malpractice case addressing the standard of care and expert testimony requirements.',
-                dateAdded: '2024-03-11',
-                filename: '2026-03-11_sullivan-v-rooney.html'
-            },
-            {
-                id: 'united-states-v-swartz',
-                citation: '945 F. Supp. 2d 216 (D. Mass. 2013)',
-                caseName: 'United States v. Swartz',
-                court: 'U.S. District Court (D. Mass.)',
-                snippet: 'Computer fraud case examining the Computer Fraud and Abuse Act and unauthorized access to protected computers.',
-                dateAdded: '2024-03-11',
-                filename: '2026-03-11_United-States-v-Swartz.html'
-            },
-            {
-                id: 'roberts-v-healey',
-                citation: '11 Mass. App. Ct. 959 (1981)',
-                caseName: 'Roberts v. Healey',
-                court: 'Massachusetts Appeals Court',
-                snippet: 'Administrative law case concerning agency authority and the standard of review for administrative decisions.',
-                dateAdded: '2024-03-10',
-                filename: '2026-03-10_Roberts-v-Healey.html'
-            },
-            {
-                id: 'brock-v-commonwealth',
-                citation: 'Record No. 0756-94-3 (Va. Ct. App. 1995)',
-                caseName: 'Brock v. Commonwealth',
-                court: 'Court of Appeals of Virginia',
-                snippet: 'Criminal procedure case addressing sufficiency of evidence and appellate review standards.',
-                dateAdded: '2024-03-11',
-                filename: '2026-03-11_Brock-v-Commonwealth.html'
+        // Fetch briefs from briefs.json and render gallery
+        let briefs = [];
+        
+        async function loadBriefs() {
+            try {
+                const response = await fetch('briefs.json');
+                if (response.ok) {
+                    briefs = await response.json();
+                } else {
+                    // Fallback to hardcoded data if briefs.json doesn't exist yet
+                    console.log('briefs.json not found, using fallback data');
+                    briefs = getFallbackBriefs();
+                }
+            } catch (error) {
+                console.error('Error loading briefs:', error);
+                briefs = getFallbackBriefs();
             }
-        ];
+            
+            // Sort by date (newest first)
+            briefs.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+            
+            // Render the gallery
+            renderGallery();
+        }
         
-        // Sort by date (newest first)
-        briefs.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-        
-        // Get 3 most recent for spotlight
-        const recentBriefs = briefs.slice(0, 3);
-        const allBriefs = briefs;
+        function getFallbackBriefs() {
+            return [
+                {
+                    id: 'me-v-the-world',
+                    citation: '991 S.W.2d 873 (Tex. App. 1999)',
+                    caseName: 'Me v. The World',
+                    court: 'Basketball Court',
+                    snippet: 'A test brief submitted via the new Submit to d-Brief button.',
+                    dateAdded: '2026-03-17',
+                    filename: 'Me-v-The-World.html'
+                },
+                {
+                    id: 'commonwealth-v-hine',
+                    citation: '393 Mass. 564 (1984)',
+                    caseName: 'Commonwealth v. Hine',
+                    court: 'Massachusetts Supreme Judicial Court',
+                    snippet: 'Analysis of reasonable doubt instructions and jury deliberation procedures in criminal cases.',
+                    dateAdded: '2024-03-10',
+                    filename: '2026-03-10_Hine-v-Commonwealth.html'
+                },
+                {
+                    id: 'marbury-v-madison',
+                    citation: '5 U.S. (1 Cranch) 137 (1803)',
+                    caseName: 'Marbury v. Madison',
+                    court: 'U.S. Supreme Court',
+                    snippet: 'Landmark case establishing judicial review and the power of federal courts to declare acts of Congress unconstitutional.',
+                    dateAdded: '2024-03-11',
+                    filename: '2026-03-11_Marbury-v-Madison.html'
+                },
+                {
+                    id: 'sullivan-v-rooney',
+                    citation: '404 Mass. 160 (1989)',
+                    caseName: 'Sullivan v. Rooney',
+                    court: 'Massachusetts Supreme Judicial Court',
+                    snippet: 'Medical malpractice case addressing the standard of care and expert testimony requirements.',
+                    dateAdded: '2024-03-11',
+                    filename: '2026-03-11_sullivan-v-rooney.html'
+                },
+                {
+                    id: 'united-states-v-swartz',
+                    citation: '945 F. Supp. 2d 216 (D. Mass. 2013)',
+                    caseName: 'United States v. Swartz',
+                    court: 'U.S. District Court (D. Mass.)',
+                    snippet: 'Computer fraud case examining the Computer Fraud and Abuse Act and unauthorized access to protected computers.',
+                    dateAdded: '2024-03-11',
+                    filename: '2026-03-11_United-States-v-Swartz.html'
+                },
+                {
+                    id: 'roberts-v-healey',
+                    citation: '11 Mass. App. Ct. 959 (1981)',
+                    caseName: 'Roberts v. Healey',
+                    court: 'Massachusetts Appeals Court',
+                    snippet: 'Administrative law case concerning agency authority and the standard of review for administrative decisions.',
+                    dateAdded: '2024-03-10',
+                    filename: '2026-03-10_Roberts-v-Healey.html'
+                },
+                {
+                    id: 'brock-v-commonwealth',
+                    citation: 'Record No. 0756-94-3 (Va. Ct. App. 1995)',
+                    caseName: 'Brock v. Commonwealth',
+                    court: 'Court of Appeals of Virginia',
+                    snippet: 'Criminal procedure case addressing sufficiency of evidence and appellate review standards.',
+                    dateAdded: '2024-03-11',
+                    filename: '2026-03-11_Brock-v-Commonwealth.html'
+                }
+            ];
+        }
         
         // Check if brief is new (added within last 7 days)
         function isNew(dateStr) {
@@ -390,6 +409,24 @@
             const diffTime = Math.abs(now - date);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             return diffDays <= 7;
+        }
+        
+        function renderGallery() {
+            // Get 3 most recent for spotlight
+            const recentBriefs = briefs.slice(0, 3);
+            const allBriefs = briefs;
+            
+            // Render recent briefs
+            const recentContainer = document.getElementById('recent-briefs');
+            if (recentContainer) {
+                recentContainer.innerHTML = recentBriefs.map(brief => renderBriefCard(brief)).join('');
+            }
+            
+            // Render all briefs
+            const allContainer = document.getElementById('all-briefs');
+            if (allContainer) {
+                allContainer.innerHTML = allBriefs.map(brief => renderBriefCard(brief, true)).join('');
+            }
         }
         
         // Render brief card
@@ -408,13 +445,8 @@
             `;
         }
         
-        // Populate recent briefs
-        const recentContainer = document.getElementById('recent-briefs');
-        recentContainer.innerHTML = recentBriefs.map(b => renderBriefCard(b, true)).join('');
-        
-        // Populate all briefs
-        const allContainer = document.getElementById('all-briefs');
-        allContainer.innerHTML = allBriefs.map(b => renderBriefCard(b, false)).join('');
+        // Load briefs on page load
+        loadBriefs();
     </script>
 </body>
 </html>
