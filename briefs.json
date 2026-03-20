@@ -1,5 +1,14 @@
 [
   {
+    "id": "test",
+    "citation": "Citation not provided",
+    "caseName": "Test Brief",
+    "court": "Court not specified",
+    "snippet": "Brief submitted via Casebriefr",
+    "dateAdded": "2026-03-20",
+    "filename": "test.html"
+  },
+  {
     "id": "united-states-v-ilario-ma-zannino",
     "citation": "895 F.2d 1, 106 A.L.R. Fed. 1, 29 Fed. R. Serv. 838, 1990 WL 965, 1990 U.S. App. LEXIS 336",
     "caseName": "United States v. Ilario M.A. Zannino",
